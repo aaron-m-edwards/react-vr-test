@@ -1,0 +1,15 @@
+{
+  "name": "Find your Dollars",
+  "icons": [
+    {
+      "src": "lowres.png",
+      "sizes": "64x64"
+    },
+    {
+      "src": "hires.png",
+      "sizes": "128x128"
+    }
+  ],
+  "display": "fullscreen",
+  "orientation": "landscape"
+}
