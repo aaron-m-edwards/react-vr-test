@@ -39,10 +39,25 @@ class findYourDollars extends React.Component {
 	constructor(props) {
 		super(props);
 		this.onClick = this.onClick.bind(this);
+		this.changeColor = this.changeColor.bind(this);
 		this.state = {
 			tv: false,
-			target: 'Dollars'
+			target: 'Dollars',
+			color: 'yellow'
 		}
+	}
+	changeColor() {
+		var color = this.state.color;
+		color = color === 'yellow' ? '#00000000': 'yellow'
+		this.setState({color});
+	}
+	componentWillMount() {
+		const ids = this.state.ids || [];
+		ids.push(setInterval(this.changeColor, 250));
+		this.setState({ids});
+	}
+	componentWillUnmount() {
+		this.state.ids.forEach(id => clearInterval(id));
 	}
 	onClick(property) {
 		const obj = {};
@@ -81,7 +96,15 @@ class findYourDollars extends React.Component {
 						{ rotateY: 180 }
 					]
 				}} >
-				{ this.state.tv ? <Image source={asset('monies.png')} style={{ width: 1.2, height : 0.8}} />: null }
+				{ this.state.tv ? (
+					<Image source={asset('monies.png')} style={{ 
+						backgroundColor: this.state.color, 
+						width: 1.2,
+						height : 0.7,
+						transform: [{rotateY: 8}]
+					
+					}} />
+					): null }
 			</View>
 		</VrButton>
 	</View>
